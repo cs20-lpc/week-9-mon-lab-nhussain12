@@ -51,45 +51,28 @@ void LinkedQueue<T>::clear() {
 template <typename T>
 void LinkedQueue<T>::copy(const LinkedQueue<T>& copyObj) {
     // TODO
-    // if (copyObj.isEmpty()) {
-    //     return;
-    // }
-
-    // clear();
-    // head = new Node(copyObj.head->value);
-    // this->length++;
-    
-    // Node* curr = head;
-    // Node* copy = copyObj.head->next;
-
-    // while (copy != nullptr) {
-    //     curr->next = new Node(copy->value);
-    //     copy = copy->next;
-    //     curr = curr->next;
-    //     this->length++;
-    // }
-    // last = curr;
-
-    clear(); // always clear first
-
     if (copyObj.isEmpty()) {
-        // head and last are already nullptr from clear()
         return;
     }
 
+    head = nullptr;
+    last = nullptr;
+    this->length = 0; 
+    
     head = new Node(copyObj.head->value);
-    this->length = 1;
-
+    this->length++;
+    
     Node* curr = head;
-    Node* copyNode = copyObj.head->next;
+    Node* copy = copyObj.head->next;
 
-    while (copyNode != nullptr) {
-        curr->next = new Node(copyNode->value);
+    while (copy != nullptr) {
+        curr->next = new Node(copy->value);
+        copy = copy->next;
         curr = curr->next;
-        copyNode = copyNode->next;
         this->length++;
     }
     last = curr;
+
 }
 
 template <typename T>
